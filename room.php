@@ -1,148 +1,256 @@
-<?php
-include('db.php');
-?>
+<?php  
+session_start();  
+if(!isset($_SESSION["user"]))
+{
+ header("location:index.php");
+}
+?> 
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>TANJUNG RHU RESORT</title>
-<!-- for-mobile-apps -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Resort Inn Responsive , Smartphone Compatible web template , Samsung, LG, Sony Ericsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-		function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- //for-mobile-apps -->
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/font-awesome.css" rel="stylesheet"> 
-<link rel="stylesheet" href="css/chocolat.css" type="text/css" media="screen">
-<link href="css/easy-responsive-tabs.css" rel='stylesheet' type='text/css'/>
-<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" property="" />
-<link rel="stylesheet" href="css/jquery-ui.css" />
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-<script type="text/javascript" src="js/modernizr-2.6.2.min.js"></script>
-<!--fonts-->
-<link href="//fonts.googleapis.com/css?family=Oswald:300,400,700" rel="stylesheet">
-<link href="//fonts.googleapis.com/css?family=Federo" rel="stylesheet">
-<link href="//fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
-<!--//fonts-->
+      <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TANJUNG RHU  RESORT</title>
+	<!-- Bootstrap Styles-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+     <!-- FontAwesome Styles-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+        <!-- Custom Styles-->
+    <link href="assets/css/custom-styles.css" rel="stylesheet" />
+     <!-- Google Fonts-->
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 </head>
 <body>
-<div class="plans-section" id="rooms">
-	 <div class="container">
-	 <h3 class="title-w3-agileits title-black-wthree">ROOMS AND RATES</h3>
-	 <div class="price-selet">
-	 <a href="reservation.php" >BOOK NOW!</a>
-</div>
-		<div class="priceing-table-main">
-			<div class="col-md-4 price-grid">
-					<div class="price-block agile">
-						<div class="price-gd-top">
-						<img src="images/damai.jpg" alt=" " class="img-responsive" />
-							<h4>DAMAI SUITE</h4>
-						</div>
-						<div class="price-gd-bottom">
-							   <div class="price-list">
-							<h5>   GARDEN/COURTYARD VIEW</h5>
-							<h6>Room size: 50 sqm. The Damai Suites have a living area and a small balcony with views of the central garden courtyard.</h6>
-							</div>
-							<div class="price-selet">	
-								<h3><span>RM</span>320</h3>						
+    <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="home.php">MAIN MENU </a>
+            </div>
 
-							</div>
-						</div>
+            <ul class="nav navbar-top-links navbar-right">
+			
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="usersetting.php"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="settings.php"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="logout.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+					
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+        </nav>
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+
+                    <li>
+                        <a  href="settings.php"><i class="fa fa-dashboard"></i>Rooms Status</a>
+                    </li>
+					<li>
+                        <a  class="active-menu" href="room.php"><i class="fa fa-plus-circle"></i>Add Room</a>
+                    </li>
+                    <li>
+                        <a  href="roomdel.php"><i class="fa fa-desktop"></i> Delete Room</a>
+                    </li>
+					
+
+                    
+            </div>
+
+        </nav>
+        <!-- /. NAV SIDE  -->
+       
+        
+       
+        <div id="page-wrapper" >
+            <div id="page-inner">
+			 <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="page-header">
+                           NEW ROOM <small></small>
+                        </h1>
+                    </div>
+                </div> 
+                 
+                                 
+            <div class="row">
+                
+                <div class="col-md-5 col-sm-5">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            ADD NEW ROOM
+                        </div>
+                        <div class="panel-body">
+						<form name="form" method="post">
+                            <div class="form-group">
+                                            <label>Type Of Room *</label>
+                                            <select name="troom"  class="form-control" required>
+												<option value selected ></option>
+                                                <option value="Damai Suite">Damai Suite</option>
+                                                <option value="Cahaya Suite">Cahaya Suite/option>
+												<option value="Bayu Senja Suite">Bayu Senja Suite</option>
+												<option value="Bayu Suria Suite">Bayu Suria Suite</option>
+                                                <option value="Bayu Family Suite">Bayu Family Suite</option>
+												<option value="Anjung Suite">Anjung Suite</option>
+                                            </select>
+                              </div>
+							  
+								<div class="form-group">
+                                            <label>Bedding Type</label>
+                                            <select name="bed" class="form-control" required>
+												<option value selected ></option>
+                                                <option value="King">King</option>
+                                                <option value="Queen">Queen</option>
+                                                                                             
+                                            </select>
+                                            
+                               </div>
+							 <input type="submit" name="add" value="Add New" class="btn btn-primary"> 
+							</form>
+							<?php
+							 include('db.php');
+							 if(isset($_POST['add']))
+							 {
+										$room = $_POST['troom'];
+										$bed = $_POST['bed'];
+										$place = 'Free';
+										
+										$check="SELECT * FROM room WHERE type = '$room' AND bedding = '$bed'";
+										$rs = mysqli_query($con,$check);
+										$data = mysqli_fetch_array($rs, MYSQLI_NUM);
+										if($data[0] > 1) {
+											echo "<script type='text/javascript'> alert('Room Already in Exists')</script>";
+											
+										}
+
+										else
+										{
+							 
+										
+										$sql ="INSERT INTO `room`( `type`, `bedding`,`place`) VALUES ('$room','$bed','$place')" ;
+										if(mysqli_query($con,$sql))
+										{
+										 echo '<script>alert("New Room Added") </script>' ;
+										}else {
+											echo '<script>alert("Sorry ! Check The System") </script>' ;
+										}
+							 }
+							}
+							
+							?>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                  
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            ROOMS INFORMATION
+                        </div>
+                        <div class="panel-body">
+								<!-- Advanced Tables -->
+                    <div class="panel panel-default">
+                        <?php
+						$sql = "select * from room limit 0,10";
+						$re = mysqli_query($con,$sql)
+						?>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>Room ID</th>
+                                            <th>Room Type</th>
+											<th>Bedding</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+									
+									<?php
+										while($row= mysqli_fetch_array($re))
+										{
+												$id = $row['id'];
+											if($id % 2 == 0) 
+											{
+												echo "<tr class=odd gradeX>
+													<td>".$row['id']."</td>
+													<td>".$row['type']."</td>
+												   <th>".$row['bedding']."</th>
+												</tr>";
+											}
+											else
+											{
+												echo"<tr class=even gradeC>
+													<td>".$row['id']."</td>
+													<td>".$row['type']."</td>
+												   <th>".$row['bedding']."</th>
+												</tr>";
+											
+											}
+										}
+									?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!--End Advanced Tables -->
+                    
+                       
+                            
+							  
+							 
+							 
+							  
+							  
+							   
+                       </div>
+                        
+                    </div>
+                </div>
+                
+               
+            </div>
+                    
+            
+				
 					</div>
-				</div>
-				<div class="col-md-4 price-grid ">
-					<div class="price-block agile">
-						<div class="price-gd-top">
-						<img src="images/cahaya.jpg" alt=" " class="img-responsive" />
-							<h4>CAHAYA SUITE</h4>
-						</div>
-						<div class="price-gd-bottom">
-							<div class="price-list">
-									<h5>SEA VIEW</h5>
-                                    <h6>A 100 sqm guestroom at our accommodation in Langkawi with a view of the sea, pool, 
-										and garden in this 5 Star Langkawi Resort.</h6>
-							</div>
-							<div class="price-selet">
-								<h3><span>RM</span>220</h3>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 price-grid lost">
-					<div class="price-block agile">
-						<div class="price-gd-top">
-						<img src="images/bayusuria.jpg" alt=" " class="img-responsive" />
-							<h4>BAYU SURIA SUITE</h4>
-						</div>
-						<div class="price-gd-bottom">
-							<div class="price-list">
-								<h5>POOL/GARDEN VIEW</h5>
-								<h6>If you seek a little more space and the added luxury of a separate living area and 2 balconies, 
-									the Bayu Suria Pool/Garden View Room is an ideal choice.</h6>
-							</div>
-							<div class="price-selet">
-								<h3><span>RM</span>180</h3>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 price-grid wthree lost">
-					<div class="price-block agile">
-						<div class="price-gd-top ">
-							<img src="images/bayusenja.jpg" alt=" " class="img-responsive" />
-							<h4>BAYU SENJA SUITE</h4>
-						</div>
-						<div class="price-gd-bottom">
-							<div class="price-list">
-								<h5>SEA VIEW</h5>
-								<h6>The Bayu Senja Suite is a spacious unit with a bedroom that has oversized windows with stunning 
-									views of the sea in one of the top Langkawi Luxury resorts.</h6>
-							</div>
-							<div class="price-selet">
-								<h3><span>RM</span> 150</h3>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 price-grid wthree lost">
-					<div class="price-block agile">
-						<div class="price-gd-top ">
-							<img src="images/bayufam.jpg" alt=" " class="img-responsive" />
-							<h4>BAYU FAMILY SUITE</h4>
-						</div>
-						<div class="price-gd-bottom">
-							<div class="price-list">
-								<h5>GARDEN VIEW</h5>
-								<h6>This family room has a balcony, air conditioning and satellite TV.</h6>
-							</div>
-							<div class="price-selet">
-								<h3><span>RM</span> 650</h3>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 price-grid wthree lost">
-					<div class="price-block agile">
-						<div class="price-gd-top ">
-							<img src="images/anjung.jpg" alt=" " class="img-responsive" />
-							<h4>ANJUNG SUITE</h4>
-						</div>
-						<div class="price-gd-bottom">
-							<div class="price-list">
-							<h6>A 100 sqm guestroom at our accommodation in Langkawi with a view of the sea, pool, 
-										and garden in this 5 Star Langkawi Resort.</h6>
-							</div>
-							<div class="price-selet">
-								<h3><span>RM</span> 750</h3>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-		</div>
-	</div>
+			 <!-- /. PAGE INNER  -->
+            </div>
+         <!-- /. PAGE WRAPPER  -->
+        </div>
+     <!-- /. WRAPPER  -->
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
+    <script src="assets/js/jquery-1.10.2.js"></script>
+      <!-- Bootstrap Js -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Js -->
+    <script src="assets/js/jquery.metisMenu.js"></script>
+      <!-- Custom Js -->
+    <script src="assets/js/custom-scripts.js"></script>
+    
+   
 </body>
 </html>
